@@ -25,3 +25,29 @@ console.log(isTheStringApalindrome('А роза упала на лапу Азо�
 console.log(isTheStringApalindrome('топот'));
 console.log(isTheStringApalindrome('ДовОд'));
 console.log(isTheStringApalindrome('Кекс'));
+
+const extractsAnIntFromAstring = (value) => {
+  let str;
+  if(typeof(value) === 'number') {
+    str = value.toString();
+  } else {
+    str = value;
+  }
+  let newStr = '';
+  for(let i = 0; i < str.length; i++) {
+    if(!isNaN(str[i])) {
+      newStr += str[i].toString();
+    }
+  }
+  return parseInt(newStr.replaceAll(' ', ''), 10);
+};
+
+console.log(extractsAnIntFromAstring('2023 год'));
+console.log(extractsAnIntFromAstring('ECMAScript 2022'));
+console.log(extractsAnIntFromAstring('1 кефир, 0.5 батона'));
+console.log(extractsAnIntFromAstring('агент 007'));
+console.log(extractsAnIntFromAstring('а я томат'));
+
+console.log(extractsAnIntFromAstring(2023));
+console.log(extractsAnIntFromAstring(-1));
+console.log(extractsAnIntFromAstring(1.5));
