@@ -64,7 +64,8 @@ const createPhotoDescription = () => ({
   comments: getComments(getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)),
 });
 
-const getPhotosDescriptions = (n) => Array.from({length: PHOTOS_COUNT}, createPhotoDescription);
+const getPhotosDescriptions = (n) => Array.from({length: n}, createPhotoDescription);
 
 
+// eslint-disable-next-line no-console
 console.log(getPhotosDescriptions(PHOTOS_COUNT));
