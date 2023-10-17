@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-/*const id;
- const url;
- const description;
- const likes;
- const = [];*/
+const MIN_COMMENTS = 0;
+const MAX_COMMENTS = 30;
+const PHOTOS_COUNT = 25;
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
 
 const MESSAGE = [
   'Всё отлично!',
@@ -26,24 +24,47 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+const getUniqueRandomInteger = (a, b) => {
+  const arr = [];
+  return function () {
+    let flag = true;
+    let randomInteger;
+    while (flag) {
+      randomInteger = getRandomInteger(a, b);
+      if (!arr.includes(randomInteger)){
+        arr.push (randomInteger);
+        flag = false;
+        return randomInteger;
+      }
+    }
+  };
+};
+
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+const getPhotoId = getUniqueRandomInteger(1, PHOTOS_COUNT);
+const getPhotoUrl = getUniqueRandomInteger(1, PHOTOS_COUNT);
+const getCommentId = getUniqueRandomInteger(0, 999);
 
-const createObjComment = () => ({
-  id: getRandomInteger(1, 500),
+
+const createComment = () => ({
+  id: getCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE),
   name: getRandomArrayElement(NAME),
 });
 
+const getComments = (n)=> Array.from({length: n}, createComment);
+
 const createPhotoDescription = () => ({
-  id: getRandomInteger(1, 25),
-  url: `photos/${getRandomInteger(1, 25)}.jpg`,
+  id: getPhotoId(),
+  url: `photos/${getPhotoUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
-  likes: getRandomInteger(15, 200),
-  comments: Array.from({length: getRandomInteger(0, 30)}, createObjComment),
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: getComments(getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)),
 });
 
-const photosDescriptions = Array.from({length: 25}, createPhotoDescription);
+const getPhotosDescriptions = (n) => Array.from({length: PHOTOS_COUNT}, createPhotoDescription);
 
-console.log(photosDescriptions);
+
+console.log(getPhotosDescriptions(PHOTOS_COUNT));
