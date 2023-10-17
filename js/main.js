@@ -44,7 +44,7 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const getPhotoId = getUniqueRandomInteger(1, PHOTOS_COUNT);
 const getPhotoUrl = getUniqueRandomInteger(1, PHOTOS_COUNT);
-const getCommentId = getUniqueRandomInteger(0, 999);
+const getCommentId = getUniqueRandomInteger(0, 500);
 
 
 const createComment = () => ({
