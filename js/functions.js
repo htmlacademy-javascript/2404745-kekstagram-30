@@ -44,22 +44,16 @@ console.log(extractsAnIntFromAstring(-1));
 console.log(extractsAnIntFromAstring(1.5));
 
 const time = (beginWorkDay, endWorkDay, beginOfMeeting, durationOfMeeting) => {
-  let arrBeginWorkDay = beginWorkDay.split(':');
-  let arrEndWorkDay = endWorkDay.split(':');
-  let arrBeginOfMeeting = beginOfMeeting.split(':');
-  let beginWork = Number(arrBeginWorkDay[0]) * 60 + Number(arrBeginWorkDay[1]);
-  let endWork = Number(arrEndWorkDay[0]) * 60 + Number(arrEndWorkDay[1]);
-  let beginMeeting = Number(arrBeginOfMeeting[0]) * 60 + Number(arrBeginOfMeeting[1]);
-  let workingDayDuration = endWork - beginWork;
-  let meetingDuration = endWork - beginMeeting;
-  if(beginMeeting + durationOfMeeting < beginWork || beginMeeting + durationOfMeeting > endWork) {
-    return false;
-  } else {
-    if(workingDayDuration === meetingDuration) {
-      return true;
-    }
-    return workingDayDuration - meetingDuration >= durationOfMeeting;
-  }
+  const arrBeginWorkDay = beginWorkDay.split(':');//  08:00 => ['08', '00']
+  const arrEndWorkDay = endWorkDay.split(':');
+  const arrBeginOfMeeting = beginOfMeeting.split(':');
+
+  const beginWork = Number(arrBeginWorkDay[0]) * 60 + Number(arrBeginWorkDay[1]);
+  const endWork = Number(arrEndWorkDay[0]) * 60 + Number(arrEndWorkDay[1]);
+  const beginMeeting = Number(arrBeginOfMeeting[0]) * 60 + Number(arrBeginOfMeeting[1]);
+  const endMeeting = beginMeeting + durationOfMeeting;
+
+  return beginMeeting >= beginWork && beginMeeting <= endWork && endMeeting >= beginWork && endMeeting <= endWork;
 };
 
 console.log(time('08:00', '17:30', '14:00', 90)); // true
