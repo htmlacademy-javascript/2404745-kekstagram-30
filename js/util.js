@@ -5,19 +5,21 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getUniqueRandomInteger = (a, b) => {
-  const arr = [];
+const getUniqueRandomInteger = (min, max) => {
+  const previousValues = [];
+
   return function () {
-    let flag = true;
-    let randomInteger;
-    while (flag) {
-      randomInteger = getRandomInteger(a, b);
-      if (!arr.includes(randomInteger)){
-        arr.push (randomInteger);
-        flag = false;
-        return randomInteger;
-      }
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      // eslint-disable-next-line no-console
+      console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
+      return null;
     }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
   };
 };
 

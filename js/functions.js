@@ -42,3 +42,23 @@ console.log(extractsAnIntFromAstring('а я томат'));
 console.log(extractsAnIntFromAstring(2023));
 console.log(extractsAnIntFromAstring(-1));
 console.log(extractsAnIntFromAstring(1.5));
+
+const time = (beginWorkDay, endWorkDay, beginOfMeeting, durationOfMeeting) => {
+  const arrBeginWorkDay = beginWorkDay.split(':');//  08:00 => ['08', '00']
+  const arrEndWorkDay = endWorkDay.split(':');
+  const arrBeginOfMeeting = beginOfMeeting.split(':');
+
+  const beginWork = Number(arrBeginWorkDay[0]) * 60 + Number(arrBeginWorkDay[1]);
+  const endWork = Number(arrEndWorkDay[0]) * 60 + Number(arrEndWorkDay[1]);
+  const beginMeeting = Number(arrBeginOfMeeting[0]) * 60 + Number(arrBeginOfMeeting[1]);
+  const endMeeting = beginMeeting + durationOfMeeting;
+
+  return beginMeeting >= beginWork && beginMeeting <= endWork && endMeeting >= beginWork && endMeeting <= endWork;
+};
+
+console.log(time('08:00', '17:30', '14:00', 90)); // true
+console.log(time('8:0', '10:0', '8:0', 120)); // true
+console.log(time('08:00', '14:30', '14:00', 90)); // false
+console.log(time('14:00', '17:30', '08:0', 90)); // false
+console.log(time('8:00', '17:30', '08:00', 900)); // false
+
