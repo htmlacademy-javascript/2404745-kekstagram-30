@@ -1,3 +1,6 @@
-import {getPhotosDescriptions, PHOTOS_COUNT} from'./data.js';
-// eslint-disable-next-line no-console
-console.log(getPhotosDescriptions(PHOTOS_COUNT));
+import { getPhotosDescriptions } from './data.js';
+import { PHOTOS_COUNT } from './constants.js';
+import {renderPhotos} from './photos.js';
+
+const photoArray = getPhotosDescriptions(PHOTOS_COUNT);
+renderPhotos(photoArray);
