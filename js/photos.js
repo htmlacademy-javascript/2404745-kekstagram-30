@@ -1,3 +1,4 @@
+import './user-modal.js';
 const photosItem = document.querySelector('#picture').content.querySelector('a');
 const photoList = document.querySelector('.pictures');
 
@@ -16,12 +17,16 @@ const renderPhotos = (photoArray) => {
     photo.querySelector('.picture__img').alt = description;
     photo.querySelector('.picture__likes').textContent = likes;
     photo.querySelector('.picture__comments').textContent = comments.length;
-
+    photo.url = url;
+    photo.description = description;
+    photo.likes = likes;
+    photo.comments = comments;
     photoElement.appendChild(photo);
   });
   removeCards();
   photoList.appendChild(photoElement);
 };
+
 export {renderPhotos};
 
 
